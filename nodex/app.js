@@ -1,5 +1,6 @@
 const express = require('express')
 const bodyParser = require('body-parser')
+const TaskModel = require ('./models/task')
 const app = express()
 const port = 3000
 
@@ -10,20 +11,24 @@ app.get('/', (req, res) => {
 })
 
 app.get('/task', (req, res) => {
-    res.send('<h1>Soy en Index de las tareas</h1>')
+    res.send(TaskModel.findAll());
 })
 
 app.get('/task/:id', (req, res) => {
-    res.send('<h3>Soy el VIEW de la tarea específica</h3><h1>' + req.params.id + "</h1>")
+    //res.send('<h3>Soy el VIEW de la tarea específica</h3><h1>' + req.params.id + "</h1>")
+    res.send(TaskModel.findById(req.params.id));
 })
 
 app.post('/task', (req, res) => {
     console.log(req.body.title)
     res.send(req.body)
+    // let task = new Task();
 })
 
 app.delete('/task/:id', (req, res) => {
-    res.send('<h3>Soy el DELETE de la tarea específica</h3><h1>' + req.params.id + "</h1>")
+    //res.send('<h3>Soy el DELETE de la tarea específica</h3><h1>' + req.params.id + "</h1>")
+    let ddelete = TaskModel.deleteById(req.params.id);
+    res.send("Eliminaste: " + ddelete )
 })
 
 app.listen(port, () => {
