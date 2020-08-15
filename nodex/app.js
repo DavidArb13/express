@@ -19,9 +19,9 @@ app.get('/task/:id', (req, res) => {
     res.send(TaskModel.findById(req.params.id));
 })
 
-app.post('/task', (req, res) => {
-    console.log(req.body.title)
-    res.send(req.body)
+app.post('/task/:task', (req, res) => {
+    let enviar = TaskModel.add(req.params.id);
+    res.send("Agregaste: " + enviar)
     // let task = new Task();
 })
 
