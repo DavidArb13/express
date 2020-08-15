@@ -13,14 +13,21 @@ TaskModel.prototype.toString = () => {
 TaskModel.tasks = [];
 
 TaskModel.add = (task) => { 
-    let cantidad = TaskModel.tasks.length
-    let nueva = cantidad + 1
+    let cantidad = TaskModel.tasks.length;
+    nueva = cantidad + 1;
 
-    let task1 = new TaskModel(`titulo ${nueva}`,`Description ${nueva}`,new Date(),"https://picsum.photos/200/300");
+    let cualquiera = new TaskModel(`titulo ${nueva}`,`Description ${nueva}`, new Date(),"https://picsum.photos/200/300");
        // TaskModel.add(task1);
-    TaskModel.tasks.push(task1); 
-    return true;
+    TaskModel.tasks.push(cualquiera); 
+    
+    for (let i = 0; i < TaskModel.tasks.length ; i++){
+        const task = TaskModel.tasks[i];
+        if(task.id == nueva){
+            return task;
+        }
+    }
 };
+
 
 TaskModel.findAll = () => {
 return TaskModel.tasks;
@@ -33,7 +40,7 @@ for (let index = 0; index < TaskModel.tasks.length; index++) {
     return element;
     }
 }
-
+    return [];
   //return TaskModel.tasks.find( element => task.id == id);
 };
 
@@ -43,6 +50,7 @@ if (pos >= 0) {
     //    eliminar la tarea por su posicion
     TaskModel.tasks.splice(pos, 1);
 }
+return "tarea eliminada"
 };
 
 let task1 = new TaskModel(
